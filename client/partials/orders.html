@@ -1,0 +1,63 @@
+<div ng-controller = 'orderController'>
+	<div class='row'>
+		<div class='six columns'>
+			<h3>Add a new order</h3>
+			<form>
+				<div class='row'>
+					<label>Customer</label>
+					<select class='u-full-width' ng-model='order.customer' ng-options = "customer.name for customer in customers">
+					</select>
+				</div>
+				<div class='row'>
+					<div class='four columns'>
+						<label>Quantity</label>
+						<input type='number' min='1' max='{{maxquantity}}' class='u-full-width' ng-model='order.quantity'>
+					</div>
+					<div class='eight columns'>
+						<label>Product</label>
+						<select class='u-full-width' ng-change = 'change(order.product)' ng-model='order.product' ng-options = "product.name for product in products">
+						</select>
+					</div>
+				</div>
+				<div class='row'>
+					<div class='nine columns'>
+						<label></label>
+					</div>
+					<div class='three columns'>
+						<input type='submit' value='Order' class='button-primary' ng-click = 'addOrder(order)'>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='ten columns'>
+			<p></p>
+		</div>
+		<div class='two columns'>
+			<form>
+				<input type='text' class='u-full-width' placeholder = 'filter...' ng-model='orderFilter'>
+			</form>
+		</div>
+	</div>
+	<div class='row'>
+		<table class='u-full-width'>
+			<thead>
+				<tr>
+					<th>Customer Name</th>
+					<th>Product</th>
+					<th>Quantity</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+				<tr ng-repeat = 'order in orders | filter: orderFilter'>
+					<td ng-bind = "order.name"></td>
+					<td ng-bind = "order.product"></td>
+					<td ng-bind = "order.quantity"></td>
+					<td ng-bind = "order.date | date: 'MMMM d yyyy'"></td>
+				</tr>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+</div>

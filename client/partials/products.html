@@ -1,0 +1,40 @@
+<div ng-controller = 'productController'>
+	<div class='row'>
+		<div class='two columns'>
+			<form>
+				<input type='text' placeholder = 'search...' ng-model='productFilter'>
+				<input type='submit' value='Filter' class='button'>
+			</form>
+			<h5>Add a new product</h5>
+			<form>
+				<label>Name:</label>
+				<input type='text' placeholder = 'name...' required ng-model = 'product.name'>
+				<label>Image (url):</label>
+				<input type='url' placeholder = 'http://' required ng-model = 'product.image'>
+				<label>Description</label>
+				<textarea required ng-model = 'product.description'></textarea>
+				<label>Initial Quantity:</label>
+				<input type='number' min='1' ng-model = 'product.init_quantity'>
+				<input type='submit' value = 'Create' class='button-primary' ng-click = 'addProduct(product)'>
+			</form>
+		</div>
+		<div class='ten columns'>
+			<div class='row'>
+				<div class='image-container' ng-repeat = "product in products | filter: productFilter | limitTo:quantity">
+					<div class='image' ng-style="{'background-image': 'url({{product.image}})'}">
+					</div>
+					<p ng-bind='product.name'></p>
+					<p>(<span ng-bind='product.init_quantity'></span> left)</p>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='four columns'>
+					<p></p>
+				</div>
+				<div class='four columns'>
+					<a href="" ng-click = 'showMore()' ng-if='products.length > quantity'>show more...</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,46 @@
+<div ng-controller = 'customerController'>
+	<h2>Add a new customer</h2>
+	<div class='row'>
+		<div class='six columns'>
+			<form>
+				<div class='row'>
+					<div class = 'ten columns'>
+						<label for = 'name'>Customer Name:</label>
+						<input type='text' id='name' class='u-full-width' ng-model = 'customer.name'>
+					</div>
+					<div class = 'two columns'>
+						<input type='submit' value='Add' class='button-primary' style='margin-top:30px' ng-click='addCustomer(customer)'>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='ten columns'>
+			<p style='color: red' ng-bind = 'errorMessage'></p>
+		</div>
+		<div class='two columns'>
+			<form>
+				<input type='text' class='u-full-width' placeholder = 'filter...' ng-model='customerFilter'>
+			</form>
+		</div>
+	</div>
+	<div class='row'>
+		<table class='u-full-width'>
+			<thead>
+				<tr>
+					<th>Customer Name</th>
+					<th>Created Date</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+				<tr ng-repeat = 'customer in customers | filter: customerFilter'>
+					<td ng-bind = "customer.name"></td>
+					<td ng-bind = "customer.date | date: 'MMMM d yyyy'"></td>
+					<td><button class='button' ng-click = 'deleteCustomer(customer)'>Delete</button></td>
+				</tr>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -1,0 +1,52 @@
+<div ng-controller = 'dashboardController'>
+	<div class='row'>
+		<div class='two columns'>
+			<form>
+				<input type='text' placeholder = 'search...' ng-model='productFilter'>
+				<input type='submit' value='Filter' class='button'>
+			</form>
+		</div>
+		<div class='ten columns'>
+			<div class='row'>
+				<div class='image-container' ng-repeat = "product in products | filter: productFilter | limitTo:quantity">
+					<div class='image' ng-style="{'background-image': 'url({{product.image}})'}">
+					</div>
+					<p ng-bind='product.name'></p>
+					<p>(<span ng-bind='product.init_quantity'></span> left)</p>
+				</div>
+				<div class='row'>
+					<div class='four columns'>
+						<p></p>
+					</div>
+					<div class='four columns'>
+						<a href="" ng-click = 'showMore()' ng-if='products.length > quantity'>show more...</a>
+					</div>
+				</div>
+			</div>
+			<div class='row'>
+				<h4>Recent Orders</h4>
+				<p ng-repeat="order in orders"><span ng-bind = "order.name"></span> purchased <span ng-bind = "order.quantity"></span> <span ng-bind = "order.product"></span>(s)... (<span ng-bind = "order.interval"></span>)</p>
+				<div class='row'>
+					<div class='four columns'>
+						<p></p>
+					</div>
+					<div class='four columns'>
+						<a href="#/orders">show all orders...</a>
+					</div>
+				</div>
+			</div>
+			<div class='row'>
+				<h4>New Customers</h4>
+				<p ng-repeat = "customer in customers"><span ng-bind = "customer.name"></span> joined the store. (<span ng-bind = "customer.interval"></span>)</p>
+				<div class='row'>
+					<div class='four columns'>
+						<p></p>
+					</div>
+					<div class='four columns'>
+						<a href="#/customers">show all customers...</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
